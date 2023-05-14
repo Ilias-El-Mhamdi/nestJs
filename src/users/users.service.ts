@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { UsersGateway } from './users.gateway';
 import { CreateUserDto } from './interfaces/CreateUserDto';
+import { DomainError } from '../valueObjects/DomainError';
 
 @Injectable()
 export class UsersService {
@@ -9,7 +10,7 @@ export class UsersService {
   async create(user: CreateUserDto) {
     const email = user.email.value;
     if (this.usersGateway.findOne(email)) {
-      throw new Error(`[DOMAIN_ERROR_400] User ${email} already exists`);
+      throw new DomainError(`User ${email} already exists`);
     }
     return this.usersGateway.create(user);
   }

@@ -1,3 +1,5 @@
+import { DomainError } from './DomainError';
+
 type PasswordValidationResult = {
   isValid: boolean;
   reasons: string[];
@@ -9,10 +11,8 @@ export class Password {
   constructor(password: string) {
     const validationResult = this.validatePassword(password);
     if (!validationResult.isValid) {
-      throw new Error(
-        `[DOMAIN_ERROR_400] Invalid password: ${validationResult.reasons.join(
-          ', ',
-        )}`,
+      throw new DomainError(
+        `Invalid password: ${validationResult.reasons.join(', ')}`,
       );
     }
     this._value = password;

@@ -12,7 +12,7 @@ export class AuthController {
   async signup(): Promise<PresentableUser> {
     return new PresentableUser(
       await this.usersService.create({
-        email: new Email('bob@gmail.com'),
+        email: new Email('bob@gmailcom'),
         password: new Password('Bob1!1235'),
       }),
     );

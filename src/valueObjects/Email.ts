@@ -1,9 +1,11 @@
+import { DomainError } from './DomainError';
+
 export class Email {
   readonly _value: string;
 
   constructor(email: string) {
     if (!Email.isValid(email)) {
-      throw new Error('[DOMAIN_ERROR_400] Invalid email format');
+      throw new DomainError('Invalid email format');
     }
     this._value = email;
   }
